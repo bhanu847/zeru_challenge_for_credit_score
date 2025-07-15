@@ -1,0 +1,22 @@
+## ✅ 2. `analysis.md`
+
+After you **score all wallets**, we’ll do analysis.  
+
+### Code snippet to generate analysis:
+
+```python
+# Score distribution
+bins = list(range(0, 1100, 100))  # 0-100, 100-200, ...
+wallet_df['score_bucket'] = pd.cut(wallet_df['credit_score'], bins=bins)
+
+score_dist = wallet_df['score_bucket'].value_counts().sort_index()
+
+# Save plot
+plt.figure(figsize=(10,5))
+score_dist.plot(kind='bar')
+plt.title("Credit Score Distribution (0-1000)")
+plt.xlabel("Score Range")
+plt.ylabel("Number of Wallets")
+plt.tight_layout()
+plt.savefig("score_distribution.png")
+plt.show()
